@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -20,6 +20,13 @@ export default function Hero() {
       titleLine2: 'in Kangra',
     },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [heroSlides.length]);
 
   return (
     <section id="home" className="w-full max-w-[1320px] mx-auto px-3 sm:px-6 pt-0 sm:pt-1 pb-6 sm:pb-12">
